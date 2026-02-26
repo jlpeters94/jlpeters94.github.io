@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family:'Share Tech Mono', monospace;
+}
+
+.slideshow {
+  position: relative;
+  width: 100%;
+  height: 100dvh; /* better mobile support than 100vh */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 80%;
+  max-height: 900px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transform: scale(1);
+  transition: opacity 1s ease-in-out, transform 4s ease-in-out;
+}
+
+.slide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Arrows */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: clamp(24px, 4vw, 40px);
+  color: #00f5d4;
+  cursor: pointer;
+  user-select: none;
+  padding: 10px;
+  z-index: 30;
+  transition: 0.3s;
+}
+
+.arrow:hover {
+  text-shadow: 0 0 10px #00f5d4, 0 0 20px #00f5d4;
+}
+
+.arrow.left {
+  left: 30%;
+}
+
+.arrow.right {
+  right: 30%;
+}
+
+/* Caption */
+.caption {
+  position: absolute;
+  bottom: 10%;
+  width: 100%;
+  padding: 15px;
+  box-sizing: border-box;
+  color: white;
+  font-size: clamp(14px, 2vw, 18px);
+  text-shadow: 0 0 10px black, 0 0 10px black, 0 0 10px black, 0 0 10px black;
+  text-align: center;
+  z-index: 15;
+}
+
+/* Dots */
+.dots {
+  position: absolute;
+  bottom: 0%;
+  width: 100%;
+  text-align: center;
+  z-index: 20;
+}
+
+.dot {
+  display: inline-block;
+  width: clamp(8px, 1.5vw, 12px);
+  height: clamp(8px, 1.5vw, 12px);
+  margin: 0 5px;
+  background: #06534b;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.dot.active {
+  background: #00f5d4;
+  transform: scale(1.2);
+}
+
+/* 📱 Mobile adjustments */
+@media (max-width: 768px) {
+  .image-wrapper {
+    height: 70%;
+  }
+
+  .caption {
+    bottom: 20%;
+    padding: 10px;
+  }
+
+  .arrow {
+    padding: 5px;
+  }
+
+  .arrow.left {
+  left: 0%;
+}
+
+.arrow.right {
+  right: 0%;
+}
+}
+
+@media (max-width: 480px) {
+  .image-wrapper {
+    height: 65%;
+  }
+
+  .caption {
+    font-size: 14px;
+  }
+
+  .dots {
+    bottom: 10%;
+  }
+}</style>
+</head>
+<body>
+
+<div class="slideshow">
+
+  <div class="arrow left">&#10094;</div>
+
+  <div class="image-wrapper">
+    <img src="img/g1.jpg" class="slide active" data-caption="Dame Da Ne (Baka Mitai) v3 Essential T-Shirt">
+    <img src="img/g2.jpg" class="slide" data-caption="DEADxLIFT Oversized T-Shirt">
+    <img src="img/g3.jpg" class="slide" data-caption="Proud to be Zercher Positive Pullover Sweatshirt">
+    <img src="img/g4.jpg" class="slide" data-caption="thank mr. skeltal Essential T-Shirt">
+    <img src="img/g5.jpg" class="slide" data-caption="Dame Da Ne (Baka Mitai) Long Sleeve T-Shirt">
+    <img src="img/g6.jpg" class="slide" data-caption="Carpe Diem Classic T-Shirt">
+    <img src="img/g7.jpg" class="slide" data-caption="80s Aesthetic Sun Boxy T-Shirt">
+    <img src="img/g8.jpg" class="slide" data-caption="How Could You Be So Heartless Oversized T-Shirt">
+    <img src="img/g9.jpg" class="slide" data-caption="Vintage Shinra Classic T-Shirt">
+    <img src="img/g10.jpg" class="slide" data-caption="Virus Free Pillow">
+
+  </div>
+<div class="caption"></div>
+    <div class="dots"></div>
+  <div class="arrow right">&#10095;</div>
+
+</div>
+
+<script>
+const slides = document.querySelectorAll(".slide");
+const caption = document.querySelector(".caption");
+const dotsContainer = document.querySelector(".dots");
+const leftArrow = document.querySelector(".arrow.left");
+const rightArrow = document.querySelector(".arrow.right");
+
+let index = 0;
+let interval;
+
+/* Create dots */
+slides.forEach((slide, i) => {
+  const dot = document.createElement("span");
+  dot.classList.add("dot");
+  if(i === 0) dot.classList.add("active");
+  dot.addEventListener("click", () => showSlide(i));
+  dotsContainer.appendChild(dot);
+});
+
+const dots = document.querySelectorAll(".dot");
+
+function showSlide(i) {
+  slides[index].classList.remove("active");
+  dots[index].classList.remove("active");
+
+  index = i;
+
+  slides[index].classList.add("active");
+  dots[index].classList.add("active");
+  caption.textContent = slides[index].dataset.caption;
+
+  resetAuto();
+}
+
+function nextSlide() {
+  showSlide((index + 1) % slides.length);
+}
+
+function prevSlide() {
+  showSlide((index - 1 + slides.length) % slides.length);
+}
+
+rightArrow.addEventListener("click", nextSlide);
+leftArrow.addEventListener("click", prevSlide);
+
+/* Auto play */
+function startAuto() {
+  interval = setInterval(nextSlide, 5000);
+}
+
+function resetAuto() {
+  clearInterval(interval);
+  startAuto();
+}
+
+/* Initialize first caption */
+caption.textContent = slides[index].dataset.caption;
+
+startAuto();
+</script>
+
+</body>
+</html>

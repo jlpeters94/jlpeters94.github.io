@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Custom Music Player</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    body {
+  font-family:'Share Tech Mono', monospace;
+  color: white;
+  text-align: center;
+
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #08292c; 
+backdrop-filter:blur(5px);
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #06534b; 
+backdrop-filter:blur(5px);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background:rgba(0,255,200,0.4); 
+}
+
+.player {
+  margin: auto;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between; /* controls left, time right */
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.controls button {
+ background:rgba(0,255,200,0.05);
+  backdrop-filter:blur(5px);
+ border:1px solid rgba(0,255,200,0.2);
+  padding: 8px 16px;
+  margin-right: 5px;
+  cursor: pointer;
+  color: white;
+  font-size: 14px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.controls button:hover {
+  background: #00f5d4;
+  color: black;
+}
+
+.time {
+  font-size: 14px;
+  color: #eee;
+}
+
+.progress-container {
+  width: 100%;
+  height: 10px;
+  background: rgba(0,255,200,0.2);
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+#progress {
+  height: 100%;
+  width: 0%;
+  background: #00f5d4;
+  border-radius: 5px;
+}
+
+
+#playlist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+ background:rgba(0,255,200,0.05);
+  backdrop-filter:blur(5px);
+ border:1px solid rgba(0,255,200,0.2);
+  height: auto;   /* set the height you want */
+  overflow-y: auto;    /* enable vertical scrolling */
+}
+
+/* keep your existing styles */
+#playlist li {
+  padding: 10px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#playlist li:hover {
+  background: rgba(0,255,200,0.2);
+}
+
+#playlist li.active {
+  background: #00f5d4;
+  color: #111;
+}
+
+  </style>
+</head>
+<body>
+  <h3 id="song-title">Music Player</h1>
+<div class="player">
+  <audio id="audio" src="music/podcast1.mp3"></audio>
+
+  <div class="top-bar">
+    <div class="controls">
+      <button id="play">►</button>
+      <button id="pause">II</button>
+    </div>
+    <div class="time">
+      <span id="current">0:00</span> / <span id="duration">0:00</span>
+    </div>
+  </div>
+
+  <div class="progress-container">
+    <div id="progress"></div>
+  </div>
+
+  <ul id="playlist">
+    <li data-src="music/podcast1.mp3">Horror Podcast</li> 
+
+  </ul>
+</div>
+
+
+  <script>
+  const audio = document.getElementById('audio');
+const playBtn = document.getElementById('play');
+const pauseBtn = document.getElementById('pause');
+const progressContainer = document.querySelector('.progress-container');
+const progress = document.getElementById('progress');
+const currentTimeEl = document.getElementById('current');
+const durationEl = document.getElementById('duration');
+const playlist = document.getElementById('playlist');
+const tracks = playlist.getElementsByTagName('li');
+const songTitle = document.getElementById('song-title');
+
+// Play / Pause
+playBtn.addEventListener('click', () => audio.play());
+pauseBtn.addEventListener('click', () => audio.pause());
+
+// Update progress bar
+audio.addEventListener('timeupdate', () => {
+  const percent = (audio.currentTime / audio.duration) * 100;
+  progress.style.width = percent + '%';
+  updateTime();
+});
+
+// Click to seek
+progressContainer.addEventListener('click', (e) => {
+  const width = progressContainer.clientWidth;
+  const clickX = e.offsetX;
+  const duration = audio.duration;
+  audio.currentTime = (clickX / width) * duration;
+});
+
+// Update time display
+function updateTime() {
+  const currentMinutes = Math.floor(audio.currentTime / 60);
+  const currentSeconds = Math.floor(audio.currentTime % 60);
+  const durationMinutes = Math.floor(audio.duration / 60);
+  const durationSeconds = Math.floor(audio.duration % 60);
+
+  currentTimeEl.textContent = `${currentMinutes}:${currentSeconds.toString().padStart(2, '0')}`;
+  durationEl.textContent = `${durationMinutes}:${durationSeconds.toString().padStart(2, '0')}`;
+}
+
+// Playlist click
+for (let track of tracks) {
+  track.addEventListener('click', function() {
+    for (let t of tracks) t.classList.remove('active');
+    this.classList.add('active');
+    audio.src = this.getAttribute('data-src');
+    audio.play();
+    // Update title at the top
+    songTitle.textContent = this.textContent;
+  });
+}
+
+
+  </script>
+</body>
+</html>

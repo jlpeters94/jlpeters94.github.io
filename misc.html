@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jess Peters | Digital Architect</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <!-- Particles.js -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+<style>
+:root{
+  --primary:#00f5d4;
+  --secondary:#00b4d8;
+  --dark:#030b10;
+  --bg-gradient:linear-gradient(135deg,#021014,#081e26,#021014);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:'Share Tech Mono', monospace;
+  background:var(--bg-gradient);
+  color:white;
+  overflow-x:hidden;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #08292c; 
+backdrop-filter:blur(5px);
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #06534b; 
+backdrop-filter:blur(5px);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background:rgba(0,255,200,0.4); 
+}
+
+
+
+/* Animated background grid */
+body::before{
+  content:"";
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:
+  repeating-linear-gradient(
+    0deg,
+    rgba(0,255,200,0.05),
+    rgba(0,255,200,0.05) 1px,
+    transparent 1px,
+    transparent 50px
+  );
+  animation: moveGrid 3s linear infinite;
+  z-index:-1;
+}
+
+@keyframes moveGrid{
+  0%{background-position:0 0;}
+  100%{background-position:0 60px;}
+}
+
+/* ===== Skills ===== */
+    .skill { margin: 1rem 0; }
+    .skill-name { margin-bottom: 0.3rem; }
+    .skill-bar { width: 100%; background:rgba(0,255,200,0.05); height: 20px;  border:1px solid rgba(0,255,200,0.2); overflow: hidden; }
+    .skill-bar-inner { height: 100%; background: #00f5d4; width: 0%; transition: width 1s; }
+
+/* Navbar */
+nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  background:rgba(0,255,200,0.05);
+  backdrop-filter:blur(5px);
+border:1px solid rgba(0,255,200,0.2);
+  display:flex;
+  justify-content:space-between;
+  padding:15px 50px;
+  z-index:999;
+}
+
+nav ul{
+  display:flex;
+  gap:30px;
+  list-style:none;
+}
+
+nav a{
+  text-decoration:none;
+  color:white;
+  font-weight:bold;
+  transition:0.3s;
+}
+
+nav a:hover{
+  text-shadow:0 0 10px white;
+  transform:scale(1.2);
+}
+
+ /* Fake System Metrics */
+#sysMetrics {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  background: rgba(0,0,0,0.8);
+  color: var(--primary);
+  padding: 10px;
+  font-size: 0.8rem;
+  border-radius: 10px;
+}
+
+ /* Back to Top Button Styles */
+#backToTop {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  border: 2px solid rgba(0,255,200,0.2); /* neutral gray border */
+  border-radius: 50%;
+  background: rgba(0,255,200,0.05); /* dark base */
+  color: #eee; /* light text */
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 9999;
+
+  font-family: monospace;
+  text-shadow: 0 0 5px #fff;
+  box-shadow: 0 0 10px rgba(0,255,200,0.2), 0 0 20px #000 inset;
+  transition: all 0.3s ease;
+
+  /* Hidden by default */
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Visible state */
+#backToTop.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Hover effect */
+#backToTop:hover {
+  background: rgba(0,255,200,0.05);
+  box-shadow: 0 0 15px var(--primary);
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Glitch animation on click */
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(2px, -2px); }
+  60% { transform: translate(-1px, 1px); }
+  80% { transform: translate(1px, -1px); }
+  100% { transform: translate(0); }
+}
+
+#backToTop:active {
+  animation: glitch 0.2s linear;
+}
+
+
+/* Hero */
+.hero{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
+}
+
+.hero h1{
+  font-size:60px;
+  font-family:'Orbitron',sans-serif;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  animation:glitch 1s infinite;
+}
+
+.hero h2{
+  margin-top:20px;
+  font-size:28px;
+  color:var(--primary);
+}
+
+.hero p{
+  margin-top:30px;
+  max-width:700px;
+  line-height:1.8;
+  opacity:0.8;
+}
+
+/* Glitch effect */
+@keyframes glitch{
+  0%{text-shadow:3px 3px var(--secondary);}
+  50%{text-shadow:-3px -3px var(--primary);}
+  100%{text-shadow:3px -3px var(--secondary);}
+
+}
+
+/* Sections */
+section{
+  padding:100px 10%;
+  min-height:100vh;
+  opacity:1;
+}
+
+section h2{
+  font-family:'Orbitron';
+  font-size:40px;
+  margin-bottom:40px;
+  color:var(--primary);
+  text-shadow:0 0 10px var(--primary);
+}
+
+.card-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:40px;
+}
+
+.card{
+  background:rgba(0,255,200,0.05);
+  padding:20px;
+  border:1px solid rgba(0,255,200,0.2);
+  backdrop-filter:blur(10px);
+  transition:0.3s;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.card:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 20px var(--primary);
+}
+
+.card-icon {
+  max-width: 100%; /* scales down if container is smaller */
+  height: auto; /* keeps aspect ratio */
+  display: block; /* removes inline spacing issues */
+  margin: 0 auto 12px;
+}
+
+.card .cta {
+  display: inline-block;
+  margin-top: 12px;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
+  margin: 10px 10px 10px 0px;
+}
+
+#typing::after {
+  content: "█";
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Modal */
+.modal{
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.7);
+backdrop-filter:blur(5px);
+  justify-content:center;
+  align-items:center;
+}
+
+.modal-content{
+  background:#021014;
+  padding:40px;
+  max-width:800px;
+}
+
+.modal img{
+  width:100%;
+  margin-top:20px;
+}
+
+img {
+  max-height: 300px;
+}
+
+/* Footer */
+footer{
+  padding:40px;
+  text-align:center;
+  background:#000;
+  font-size:14px;
+}
+
+/* Scroll Progress */
+#progressBar{
+  position:fixed;
+  bottom:0;
+  left:0;
+  height:10px;
+  background:var(--primary);
+  width:0%;
+  z-index:9999;
+}
+
+.btn-hacker {
+  position: relative;
+  display: inline-block;
+  padding: 15px 40px;
+  color: var(--primary);
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 18px;
+  letter-spacing: 2px;
+  font-weight: bold;
+  border: 1px solid rgba(0,255,200,0.2);
+  background:rgba(0,255,200,0.05);
+  backdrop-filter:blur(5px);
+  overflow: hidden;
+  transition: 0.3s ease;
+  color: white;
+}
+
+
+
+.btn-hacker:hover::before {
+  left: 100%;
+}
+
+.btn-hacker:hover {
+  color: #000;
+  background: var(--primary);
+  box-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+}
+
+.links {
+  color: var(--primary);
+
+}
+</style>
+</head>
+
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor"></div>
+
+<div id="progressBar"></div>
+
+<nav>
+<div style="color:white;font-weight:bold;"><a href="index.html">JESSPETERS.EXE</a></div>
+<ul>
+<li><a href="index.html#about">ABOUT</a></li>
+<li><a href="index.html#skills">SKILLS</a></li>
+<li><a href="index.html#projects">PROJECTS</a></li>
+<li><a href="index.html#tools">TOOLS</a></li>
+<li><a href="index.html#contact">CONTACT</a></li>
+</ul>
+</nav>
+
+<div id="particles-js"></div>
+
+<section>
+<h2>Miscellaneous</h2>
+<p>
+This section is a collection of projects that don’t fit into just one category. These works show my creativity, curiosity, and willingness to experiment with different tools and ideas. Some were built to solve small personal needs, others were made just to explore something new.
+</p><br><br><br>
+<div class="card-grid">
+<a href="#"><div class="card">
+<img src="img/pz.png" class="card-icon">
+<h3>Project Zomboid Save Manager</h3>
+<p>A utility that helps players protect their progress. It backs up saves into a ZIP file for safe storage and includes a restore feature to recover the latest backup if the player dies in-game. This ensures that gameplay data is secure and easy to restore, giving players more control over their survival experience.</p>
+</div></a>
+<a href="#"><div class="card">
+<img src="img/aud.gif" class="card-icon">
+<h3>Audition Next Gen Training App</h3>
+<p>A browser-based tool designed for Club Audition players to practice outside the game. It lets users train unlimited times on 8-direction arrow key inputs, focusing on speed and accuracy. Unlike in-game sessions where attempts end after a song or a mistake, this app provides continuous practice, helping players sharpen their skills without limits.</p>
+</div></a>
+</div><br><br><br>
+<center>
+<a href="graphic.html" class="btn-hacker"><span>Previous: Graphic Design Projects</span></a>
+<a href="index.html#projects" class="btn-hacker"><span>Home</span></a>
+</center>
+</section>
+
+<footer>
+=================================================<br><br>
+© 2026 JESS PETERS | DIGITAL ARCHITECT<br><br>
+STATUS: ACTIVE | NODE: NEON-GRID | UPLINK: STABLE<br><br>
+=================================================
+</footer>
+
+  <!-- Fake System Metrics Panel -->
+<div id="sysMetrics">
+  CPU: <span id="cpu">0%</span><br>
+  RAM: <span id="ram">0%</span><br>
+  NET: <span id="net">0Mbps</span><br>
+  UPTIME: <span id="uptime">0h 0m</span><br>
+  SYS TIME: <span id="systime">00:00:00</span>
+</div>
+
+
+<button id="backToTop">▲</button>
+
+<div class="modal" id="modal">
+<div class="modal-content">
+<h2>Sample Project</h2>
+<p>Placeholder for project images and descriptions.</p>
+<img src="https://via.placeholder.com/600x300">
+<button onclick="closeModal()">Close</button>
+</div>
+</div>
+
+<script>
+// Typing animation
+const titles=[
+"Cybernetic Systems Architect",
+"Digital Sound Alchemist",
+"Neon Interface Engineer",
+"Audio Signal Manipulator",
+"Visual Data Hacker"
+];
+let i=0;
+let j=0;
+let current="";
+let isDeleting=false;
+
+function type(){
+if(i<titles.length){
+if(!isDeleting && j<=titles[i].length){
+current=titles[i].substring(0,j++);
+}else if(isDeleting && j>=0){
+current=titles[i].substring(0,j--);
+}
+document.getElementById("typing").innerHTML=current || "&nbsp;";
+
+if(!isDeleting && j === titles[i].length + 1){
+isDeleting=true;
+setTimeout(type,1000);
+return;
+}
+if(j<0){
+isDeleting=false;
+i=(i+1)%titles.length;
+setTimeout(type, 500);
+return;
+}
+}
+setTimeout(type,isDeleting?50:50);
+}
+type();
+
+// Progress bar
+let scrollTop=document.documentElement.scrollTop;
+let height=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+let scrolled=(scrollTop/height)*100;
+document.getElementById("progressBar").style.width=scrolled+"%";
+});
+
+// Modal
+function openModal(){
+document.getElementById("modal").style.display="flex";
+}
+function closeModal(){
+document.getElementById("modal").style.display="none";
+}
+</script>
+
+<!-- ====================== ADDITIONS START ====================== -->
+
+<!-- GSAP + ScrollTrigger -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<!-- Particles -->
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+<style>
+/* Terminal Boot */
+#bootScreen{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:#030b10;
+  color:var(--primary);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:10000;
+  padding:40px;
+}
+#terminalText{
+  max-width:800px;
+  white-space:pre-line;
+  font-size:18px;
+}
+
+/* Particle Layer */
+#particles-js{
+  position:fixed;
+  width:100%;
+  height:100%;
+  z-index:-2;
+}
+
+
+/* Skill Bars */
+.skill-bar{
+  background:rgba(0,255,200,0.1);
+  margin-top:15px;
+  height:10px;
+  position:relative;
+  overflow:hidden;
+}
+.skill-progress{
+  height:100%;
+  width:0%;
+  background:#00f5d4;
+  box-shadow:0 0 10px #00f5d4;
+}
+
+/* Parallax */
+.parallax-layer{
+  position:fixed;
+  width:120%;
+  height:120%;
+  background:url('https://images.unsplash.com/photo-1535223289827-42f1e9919769') center/cover no-repeat;
+  opacity:0.05;
+  z-index:-3;
+  transform:translateZ(0);
+}
+</style>
+
+<!-- Parallax + Particles -->
+<div class="parallax-layer"></div>
+<div id="particles-js"></div>
+
+<script>
+
+ // ===== Particles.js =====
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 100 },
+        "color": { "value": ["#00f5d4","#00f5d4","#00f5d4"] },
+        "shape": { "type": "circle" },
+        "opacity": { "value": 0.1 },
+        "size": { "value": 1 },
+        "line_linked": { "enable": true, "distance": 150, "color": "#00ffcc", "opacity": 0.1, "width": 1 },
+        "move": { "enable": true, "speed": 0.5 }
+      }
+    });
+
+
+// ===== Skill Bar Animation =====
+    const skillBars = document.querySelectorAll('.skill-bar-inner');
+    skillBars.forEach(bar => {
+      let percent = bar.getAttribute('data-percent');
+      gsap.to(bar, {width:percent, duration:1, scrollTrigger:{
+        trigger:bar, start:"top 80%", toggleActions:"play none none reverse"
+      }});
+    });
+
+   // ===== Custom Cursor =====
+    const cursor = document.querySelector('.cursor');
+    document.addEventListener('mousemove', e=>{
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+
+const bootLines = [
+  "[BOOT] Initializing JessPeters.exe ...",
+  "[SYS] Loading cyber modules [OK]",
+  "[PROC] Injecting neon_protocol.dll ...",
+  "[AUDIO] Engine init sequence [OK]",
+  "[VISUAL] Matrix compiler engaged ...",
+  "[NET] Establishing uplink to NeonGrid ...",
+  "[SEC] Firewall status: ACTIVE",
+  "[SYS] >>> Boot sequence complete",
+  "[AUTH] Welcome to the Digital Grid"
+];
+
+let lineIndex = 0;
+let charIndex = 0;
+
+function typeBoot() {
+  const terminal = document.getElementById("terminalText");
+
+  if (lineIndex < bootLines.length) {
+    const currentLine = bootLines[lineIndex];
+
+    if (charIndex < currentLine.length) {
+      terminal.innerHTML += currentLine.charAt(charIndex);
+      charIndex++;
+      setTimeout(typeBoot, 0); // typing speed (ms per character), 3
+    } else {
+      terminal.innerHTML += "\n"; // move to next line
+      lineIndex++;
+      charIndex = 0;
+      setTimeout(typeBoot, 0); // pause before next line, 200
+    }
+  } else {
+    // After boot sequence, fade out boot screen
+    setTimeout(() => {
+      gsap.to("#bootScreen", {
+        opacity: 0,
+        duration: 1,
+        onComplete: () => {
+          document.getElementById("bootScreen").style.display = "none";
+        }
+      });
+    }, 0); // 1000
+  }
+}
+
+// Start typing
+typeBoot();
+
+const backToTop = document.getElementById("backToTop");
+
+// Show button only when scrolled down
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 500) {
+    backToTop.classList.add("show");
+  } else {
+    backToTop.classList.remove("show");
+  }
+});
+
+// Smooth scroll back to top
+backToTop.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+function updateMetrics() {
+  // Random CPU usage between 10–90%
+  document.getElementById("cpu").textContent = Math.floor(Math.random() * 80 + 10) + "%";
+
+  // Random RAM usage between 30–95%
+  document.getElementById("ram").textContent = Math.floor(Math.random() * 65 + 30) + "%";
+
+  // Random NET speed between 50–500 Mbps
+  document.getElementById("net").textContent = Math.floor(Math.random() * 450 + 50) + "Mbps";
+
+  // Uptime counter (increments every minute)
+  uptimeMinutes++;
+  const hours = Math.floor(uptimeMinutes / 60);
+  const minutes = uptimeMinutes % 60;
+  document.getElementById("uptime").textContent = hours + "h " + minutes + "m";
+
+  // System time (live clock)
+  const now = new Date();
+  const hh = String(now.getHours()).padStart(2, "0");
+  const mm = String(now.getMinutes()).padStart(2, "0");
+  const ss = String(now.getSeconds()).padStart(2, "0");
+  document.getElementById("systime").textContent = `${hh}:${mm}:${ss}`; 
+}
+
+// Start uptime at 0
+let uptimeMinutes = 0;
+
+// Update every 2 seconds
+setInterval(updateMetrics, 2000);
+
+// Initialize immediately
+updateMetrics();
+
+setInterval(() => {
+  const now = new Date();
+  const hh = String(now.getHours()).padStart(2, "0");
+  const mm = String(now.getMinutes()).padStart(2, "0");
+  const ss = String(now.getSeconds()).padStart(2, "0");
+  document.getElementById("systime").textContent = `${hh}:${mm}:${ss}`; }, 1000);
+
+</script>
+
+<!-- ====================== ADDITIONS END ====================== -->
+
+</body>
+</html>
