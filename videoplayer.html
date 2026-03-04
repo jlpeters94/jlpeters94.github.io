@@ -175,6 +175,11 @@ transition: background 0.3s;
         margin-top: 5px;
       }
     }
+
+#fullScreen {
+  font-weight: bold;
+  margin-left: 15px;
+}
   </style>
 </head>
 <body>
@@ -189,6 +194,9 @@ transition: background 0.3s;
         <input type="range" class="slider" id="progressBar" value="0" min="0" max="100">
       </div>
       <div class="time" id="timeDisplay">0:00 / 0:00</div>
+      <div class="buttons"> 
+        <button id="fullScreen">⛶</button>
+      </div>
     </div>
   </div>
 
@@ -252,6 +260,7 @@ transition: background 0.3s;
     const progressBar = document.getElementById('progressBar');
     const timeDisplay = document.getElementById('timeDisplay');
     const playlistItems = document.querySelectorAll('.playlist li');
+    const fullScreenBtn = document.getElementById('fullScreen');
 
     function formatTime(seconds) {
       const minutes = Math.floor(seconds / 60);
@@ -268,6 +277,16 @@ transition: background 0.3s;
       progressBar.value = progress;
       timeDisplay.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
     });
+
+fullScreenBtn.addEventListener("click", () => {
+  if (video.requestFullscreen) {
+    video.requestFullscreen();
+  } else if (video.webkitRequestFullscreen) { // Safari
+    video.webkitRequestFullscreen();
+  } else if (video.msRequestFullscreen) { // IE/Edge
+    video.msRequestFullscreen();
+  }
+});
 
     playPauseBtn.addEventListener('click', () => {
       if (video.paused) {
