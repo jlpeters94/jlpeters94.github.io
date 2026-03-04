@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jess Peters | Digital Architect</title>
-
+<link rel="icon" type="image/x-icon" href="img/jp.ico">
 <!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <!-- Particles.js -->
@@ -33,26 +33,27 @@ body{
 }
 
 /* width */
-*::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 10px;
 }
 
 /* Track */
-*::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   background: #08292c; 
 backdrop-filter:blur(5px);
 }
  
 /* Handle */
-*::-webkit-scrollbar-thumb {
-  background:#06534b; 
+::-webkit-scrollbar-thumb {
+  background: #06534b; 
 backdrop-filter:blur(5px);
 }
 
 /* Handle on hover */
-*::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
   background:rgba(0,255,200,0.4); 
 }
+
 
 
 /* Animated background grid */
@@ -372,46 +373,55 @@ footer{
   box-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
 }
 
-iframe {
-  width:100%;
-  height: 500px;
-  overflow: hidden;
-  margin: 0 auto;
-  display: block;
+.links {
+  color: var(--primary);
+
 }
 </style>
 </head>
 
 <body>
 
+  <!-- Custom Cursor -->
+  <div class="cursor"></div>
+
 <div id="progressBar"></div>
 
 <nav>
-<div style="color:white;font-weight:bold;"><a href="index.html">JESSPETERS.EXE</a></div>
+<div style="color:white;font-weight:bold;"><a href="https://jlpeters94.github.io">JESSPETERS.EXE</a></div>
 <ul>
-<li><a href="index.html#about">ABOUT</a></li>
-<li><a href="index.html#skills">SKILLS</a></li>
-<li><a href="index.html#projects">PROJECTS</a></li>
-<li><a href="index.html#tools">TOOLS</a></li>
-<li><a href="index.html#contact">CONTACT</a></li>
+<li><a href="https://jlpeters94.github.io/#about">ABOUT</a></li>
+<li><a href="https://jlpeters94.github.io/#skills">SKILLS</a></li>
+<li><a href="https://jlpeters94.github.io/#projects">PROJECTS</a></li>
+<li><a href="https://jlpeters94.github.io/#tools">TOOLS</a></li>
+<li><a href="https://jlpeters94.github.io/#contact">CONTACT</a></li>
 </ul>
 </nav>
 
 <div id="particles-js"></div>
 
 <section>
-<h2>Video Editing Projects</h2>
+<h2>Programming Projects</h2>
 <p>
-Video editing is where raw footage turns into a story. In these projects, I cut, arrange, and shape clips so they flow with purpose. Sometimes it’s about simple adjustments—tightening a scene, correcting colors, or smoothing transitions. Other times it’s about building atmosphere, adding effects, or weaving in text and music to change how the viewer feels. Each edit is a chance to experiment with pacing, style, and storytelling. Together, these works show how I grow as an editor and how I use video to create something more than just moving images.
+This page shows my programming projects. Each project is made to show what I can do with code. Some are small and simple, while others are bigger and more complete. They all prove my skills and how I solve problems with programming. These projects also show my progress as I keep learning and improving. Visitors can explore them to see clear examples of my work. Overall, this page is a strong display of my ability and my journey in coding.
 </p><br><br><br>
-
-<iframe src="videoplayer.html"  frameBorder="0" scrolling="no">Browser not compatible.</iframe>
-
-<br><br><br>
+<div class="card-grid">
+<a href="https://drive.google.com/file/d/1YTm7DNSShBR__onMnvx46ZtgOrdp0iUS/view?usp=sharing" target="_blank"><div class="card">
+<img src="img/fms.png" class="card-icon">
+<h3>Fitness Monitoring System</h3>
+<p>A mobile app for Android that detects the user’s full body using the phone’s camera and calculates the user’s BMI. The application then picks the appropriate training program for the user. </p>
+<span class="cta">View Journal ➝</span>
+</div></a>
+<a href="https://jlpeters94.github.io/anc-fitness-gym-website/" target="_blank"><div class="card">
+<img src="img/ancfg.png" class="card-icon">
+<h3>ANC Fitness Gym Website</h3>
+<p>A website for ANC Fitness Gym where users can sign up and log in to access different training programs and apply for monthly and yearly membership. Users can also view exercise tutorials, faqs, and the ambassadors’ profiles, blogs, and training logs. </p>
+<span class="cta">View Website ➝</span>
+</div></a>
+</div><br><br><br>
 <center>
-<a href="audio.html" class="btn-hacker"><span>Previous: Sound Editing Projects</span></a>
-<a href="index.html#projects" class="btn-hacker"><span>Home</span></a>
-<a href="graphic.html" class="btn-hacker"><span>Next: Graphic Design Projects</span></a>
+<a href="https://jlpeters94.github.io/#projects" class="btn-hacker"><span>Home</span></a>
+<a href="https://jlpeters94.github.io/projects/music" class="btn-hacker"><span>Next: Music Projects</span></a>
 </center>
 </section>
 
